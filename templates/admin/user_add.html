@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Plantilla Admin</title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/static/css/dashboard.css" rel="stylesheet" />
+
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div>{% include 'fragments/admin/menu_superior.html' %}</div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div>{% include 'fragments/admin/menu_lateral.html' %}</div>
+        
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">Agregar autor</h1>
+            <form method="post" action="/useradd">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="email" class="form-control" id="username" name="username" placeholder="Insert username" required/>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Insert password" oninput="check(this)" required/>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" oninput="check(this)" required/>
+                </div>
+                <script language='javascript' type='text/javascript'>
+                    function check(input) {
+                        if (document.getElementById('confirmPassword').value !== document.getElementById('password').value) {
+                            input.setCustomValidity('Passwords must match!');
+                        } else {
+                            input.setCustomValidity('');
+                        }
+                    }
+                </script>
+                <div class="form-group">
+                    <label for="accountType">Account Type</label>
+                    <input type="text" class="form-control" id="accountType" name="accountType" placeholder="Insert account type" required/>
+                </div>
+                <button type="submit" class="btn btn-default">Add User</button>
+            </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src=js/jquery-3.2.1.min.js"><\/script>')</script>
+    <script src="/js/bootstrap.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/static/css/dashboard.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/datatables.min.css"/>
+    <script type="text/javascript" src="/static/js/datatables.min.js"></script>
+    <title>Album list</title>
+</head>
+<body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div>{% include "fragments/admin/menu_superior.html" %}</div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div> {% include "fragments/admin/menu_lateral.html" %}</div>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                <h1>Song list of {{ albumName }}</h1>
+                <table id="list" class="display">
+                <thead>
+                    <tr>
+                        <th>Artist</th>
+                        <th>Title</th>
+                        <th>Album Art Url</th>
+                        <th>Audio Url</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Artist</th>
+                        <th>Title</th>
+                        <th>Album Art Url</th>
+                        <th>Audio Url</th>
+                    </tr>
+                </tfoot>
+            </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function setupData() {
+
+            $(document).ready(function () {
+
+                var url = "/songlist/{{ albumId }}";
+
+                var table = $('#list').DataTable({
+                    "ajax": {
+                        "url": url,
+                        "dataType": "json",
+                        "dataSrc": "data",
+                        "contentType":"application/json"
+                    },
+                    "columns": [
+                        { "data": "artist" },
+                        { "data": "title" },
+                        { "data": "albumArtUrl" },
+                        { "data": "audioUrl" }
+                    ]
+                });
+            });
+        }
+        $( window ).on( "load", setupData );
+    </script>
+    <script src="/static/js/bootstrap.min.js"></script>
+
+</body>
+</html>

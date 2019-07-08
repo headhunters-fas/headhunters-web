@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/static/css/dashboard.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/datatables.min.css"/>
+    <script type="text/javascript" src="/static/js/datatables.min.js"></script>
+    <title>Album list</title>
+</head>
+<body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div>{% include "fragments/admin/menu_superior.html" %}</div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div> {% include "fragments/admin/menu_lateral.html" %}</div>
+
+
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                <h1>Album list</h1>
+                <button id="delete">Delete Album</button>
+                <button id="listSongs">List Songs</button>
+                <table id="list" class="display">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Artist</th>
+                        <th>Url</th>
+                        <th>Image</th>
+                        <th>Likes</th>
+                        <th>Genre</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Id</th>
+                        <th>Title</th>
+                        <th>Artist</th>
+                        <th>Url</th>
+                        <th>Image</th>
+                        <th>Likes</th>
+                        <th>Genre</th>
+                        <th>Description</th>
+                    </tr>
+                </tfoot>
+            </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function setupData() {
+
+            $(document).ready(function () {
+
+                var selected;
+
+                var table = $('#list').DataTable({
+                    "ajax": {
+                        "url": "/albumlist",
+                        "dataType": "json",
+                        "dataSrc": "data",
+                        "contentType":"application/json"
+                    },
+                    "columns": [
+                        { "data": "id" },
+                        { "data": "title" },
+                        { "data": "artist" },
+                        { "data": "url" },
+                        { "data": "image" },
+                        { "data": "likes" },
+                        { "data": "genre" },
+                        { "data":"description"}
+                    ]
+                });
+
+                $('#list tbody').on( 'click', 'tr', function () {
+                    var id = this.id;
+                    if ( $(this).hasClass('selected') ) {
+                        $(this).removeClass('selected');
+                    }
+                    else {
+                        table.$('tr.selected').removeClass('selected');
+                        $(this).addClass('selected');
+                        selected=id;
+                    }
+                });
+
+                $('#delete').click( function () {
+                    var dr = table.row('.selected');
+                    window.location.href = "/admin/album/delete/" + dr.data()['id'].toString();
+
+                });
+
+                $('#listSongs').click( function () {
+                    var dr = table.row('.selected');
+                    window.location.href = "/admin/album/songs/list/" + dr.data()['id'].toString();
+
+                });
+            });
+        }
+        $( window ).on( "load", setupData );
+    </script>
+    <script src="/static/js/bootstrap.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Plantilla Admin</title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/static/css/dashboard.css" rel="stylesheet" />
+
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div>{% include 'fragments/admin/menu_superior.html' %}</div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div>{% include 'fragments/admin/menu_lateral.html' %}</div>
+        
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">Agregar autor</h1>
+            <form method="post" action="/songadd">
+                <div class="form-group">
+                    <label for="album">Album</label>
+                    <select id="album" name="album" class="form-control">
+                        {% for album in albums %}
+                            <option value={{ album.id }}>{{ album.title }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="artist">Artist</label>
+                    <input type="text" class="form-control" id="artist" name="artist" placeholder="Insert artist" required/>
+                </div>
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="Insert title" required/>
+                </div>
+                <div class="form-group">
+                    <label for="albumArtUrl">Album Art Url</label>
+                    <input type="text" class="form-control" id="albumArtUrl" name="albumArtUrl" placeholder="Insert album art url" required/>
+                </div>
+                <div class="form-group">
+                    <label for="audioUrl">Audio Url</label>
+                    <input type="text" class="form-control" id="audioUrl" name="audioUrl" placeholder="Insert audio url" required/>
+                </div>
+                <button type="submit" class="btn btn-default">Add Song</button>
+            </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

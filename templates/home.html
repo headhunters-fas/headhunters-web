@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin - Dashboard</title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/static/css/dashboard.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div>{% include "fragments/admin/menu_superior.html" %}</div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div> {% include "fragments/admin/menu_lateral.html" %}</div>
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">Panel de control - HeadHunters</h1>
+          <div class="hero-unit">
+              <p>
+                  HeadHunters es una aplicación que respeta los derechos de autor y promueve la comercialización
+                  legal de la música comercial e incentiva el apoyo a la escena musical nacional, y a los artistas
+                  independientes.
+              </p>
+              <p>
+                  La aplicación HeadHunters es un proyecto donde las personas podrán encontrar la música que más les
+                  guste y puedan comprar los álbumes que deseen mediante nuestra aplicación. Asimismo, es un medio por
+                  el cual las bandas, solistas, entre otros, podrán darse a conocer subiendo sus canciones y recibiendo
+                  una comisión por cada canción que sea comprada. Por último, los organizadores de eventos y cazatalentos
+                  tendrán la oportunidad de contactar con las bandas o solistas que consideren para el beneficio de todos.
+              </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src=/static/js/jquery-3.2.1.min.js"><\/script>')</script>
+    <script src="/static/js/bootstrap.min.js"></script>
+  </body>
+</html>
